@@ -111,7 +111,6 @@ apps=(
   iterm2-nightly
   line
   macvim
-  mailmate
   marked
   mou
   spectacle
