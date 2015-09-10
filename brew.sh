@@ -68,9 +68,7 @@ binaries=(
   tmux
   trash
   wget
-  wine
   xvid
-  zsh 
   webkit2png
   )
 
@@ -84,14 +82,12 @@ brew tap caskroom/versions
 
 # Apps
 apps=(
-  alfred
+  airmail-amt
   arq
   bartender
   caffeine
   carbon-copy-cloner
   cleanmymac
-  devonthink-pro-office
-  djview
   dropbox
   easyfind
   evernote
@@ -103,21 +99,15 @@ apps=(
   iterm2-nightly
   mailmate
   marked
-  meteorologist
-  nvalt
-  seil
   spectacle
   pdfsam-basic
   path-finder
-  rdio
+  proctools
   skype
-  skim
-  soulver
+  spotify
   transmission
-  textwrangler
   things
   vlc
-  flux
   1password
   qlmarkdown
   quicklook-json
@@ -154,16 +144,6 @@ brew cask install ${fonts[@]}
 
 # Install vim 
 brew install macvim --with-lua --with-luajit --custom-icons --override-system-vim
- 
-# Install neovim
-brew tap neovim/neovim
-brew install --HEAD neovim
-
-brew tap rogual/neovim-dot-app
-brew install --HEAD neovim-dot-app
-
-
 
 # Change path so Homebrew packages get priority
-
-# $PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+$PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
