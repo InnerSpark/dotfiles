@@ -1,7 +1,5 @@
 # Spark's Dotfiles
 
-[TOC]
-
 ## Overview
 
 This repo contains a utility ([dfm](https://github.com/justone/dfm)) to help with managing and updating of my dotfiles. Please continue reading for instructions on how to use them.

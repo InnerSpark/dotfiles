@@ -82,37 +82,55 @@ brew tap caskroom/versions
 
 # Apps
 apps=(
+  adium
   adobe-creative-cloud
   airmail-amt
+  appzapper
   arq
+  avocode
+  axure-rp-pro
+  backblaze
   bartender
   caffeine
   carbon-copy-cloner
   cleanmymac
   dropbox
+  dropzone
   easyfind
+  ember
   evernote
   fantastical
   firefox
   fluid
+  forklift
+  geekbench
   google-chrome
+  handbrake
   hazel
+  imgoptim
   iterm2-nightly
+  line
+  macvim
   mailmate
   marked
   mou
   spectacle
-  pdfsam-basic
   path-finder
+  pdfsam-basic
+  photoninja
   proctools
+  sketch
+  slack
   skype
   spotify
   transmission
   things
+  virtualbox
   vlc
   1password
   qlmarkdown
   quicklook-json
+  wacom-tablet
   )
 
 # Install apps to /Applications
