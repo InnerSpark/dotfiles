@@ -2,7 +2,9 @@
 
 ## Overview
 
-This repo contains a utility ([dfm](https://github.com/justone/dfm)) to help with managing and updating of my dotfiles. Please continue reading for instructions on how to use them.
+This repo contains a utility ([dfm](https://github.com/justone/dfm)) to help with managing and updating of my dotfiles. 
+
+**Note:** I am a UX Designer so most of these scripts are tailored for me and may not be the best for a developer.
 
 ## Using this repo
 
