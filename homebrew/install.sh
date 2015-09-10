@@ -82,6 +82,7 @@ brew tap caskroom/versions
 
 # Apps
 apps=(
+  adobe-creative-cloud
   airmail-amt
   arq
   bartender
@@ -99,6 +100,7 @@ apps=(
   iterm2-nightly
   mailmate
   marked
+  mou
   spectacle
   pdfsam-basic
   path-finder
