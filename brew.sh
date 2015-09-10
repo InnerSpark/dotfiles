@@ -118,9 +118,6 @@ apps=(
 echo "installing apps..."
 brew cask install --appdir="/Applications" ${apps[@]}
 
-# Link alfred apps
-brew cask alfred link
-
 # install font set up
 brew tap caskroom/fonts
 
