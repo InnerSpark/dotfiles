@@ -1,0 +1,217 @@
+# Path to the bash it configuration
+export BASH_IT=$HOME/.bash
+
+source "${BASH_IT}/lib/utils.sh"
+
+if [ $(uname) = "Darwin" ]; then
+
+    export CHEATCOLORS=true
+    export JAVA_HOME="`/usr/libexec/java_home`"
+    export HTML_TIDY=$HOME/.tidyrc
+    export TLSOURCE=en TLTARGET=es
+    export LC_CTYPE="utf-8"
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/caskroom"
+
+    export PERL_LOCAL_LIB_ROOT="${HOME}/perl5:$PERL_LOCAL_LIB_ROOT";
+    export PERL_MB_OPT="--install_base "${HOME}/perl5"";
+    export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5";
+    export PERL5LIB="${HOME}/perl5/lib/perl5:$PERL5LIB";
+    export PATH="/usr/local/bin:/usr/local/sbin:${PATH}"
+    export PATH="${HOME}/perl5/bin:${PATH}"
+    export PATH="${HOME}/.rbenv/shims:${PATH}"
+
+    if hash brew 2>/dev/null; then
+        export BREW_HOME="`brew --prefix`"
+
+        # Cask installation
+        if [ ! -h "${HOME}/.cask" ]; then
+            if [ x"" != x"$(brew ls --versions cask)"  ]; then
+                CASK_HOME="`brew --prefix cask`"
+                ln -s "${CASK_HOME}" "${HOME}/.cask"
+            fi
+        fi
+
+        if [ x"" != x"$(brew ls --versions openconnect)" ]; then
+            export VPNC_SCRIPT=$BREW_HOME/etc/vpnc-script
+        fi
+
+        if brew cask info vagrant 1>/dev/null 2>&1; then
+            export VAGRANT_CHECKPOINT_DISABLE=1
+            export VAGRANT_HOME=~/.vagrant.d
+            export VAGRANT_DOTFILE_PATH=".vagrant-$(hostname)"
+            # Time Machine ignore this directory
+            export VAGRANT_VMWARE_CLONE_DIRECTORY="${HOME}/.cache/vagrant"
+        fi
+
+    else
+        echo "homebrew not installed, please consider installing it."
+    fi
+
+
+elif [ $(uname) = "Linux" ]; then
+    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+    export PATH="/usr/local/linuxbrew/bin:$PATH"
+    if hash brew 2>/dev/null; then
+        # Fix checks for gcc compiler when not present when `--env=inherit` specified
+        export BREW_HOME="`brew --prefix`"
+        export HOMEBREW_TEMP="${BREW_HOME}/tmp"
+        export MANPATH="${BREW_HOME}/share/man:$MANPATH"
+        export INFOPATH="${BREW_HOME}/share/info:$INFOPATH"
+    else
+        echo "linuxbrew not installed, please consider installing it."
+    fi
+
+    dpkg -s vagrant &>/dev/null || {
+        export VAGRANT_CHECKPOINT_DISABLE=1
+        export VAGRANT_HOME=~/.vagrant.d
+        export VAGRANT_DOTFILE_PATH=".vagrant-$(hostname)"
+    }
+
+    dpkg -s vpnc-scripts &>/dev/null || {
+        export VPNC_SCRIPT=/usr/share/vpnc-scripts/vpnc-script
+    }
+fi
+
+if hash brew 2>/dev/null; then
+    if [ x"" != x"$(brew ls --versions go)"  ]; then
+        export GOROOT=$(brew --prefix go)
+        export GOPATH=/usr/local/go
+    fi
+fi
+
+export PATH="${HOME}/.cabal/bin:$PATH"
+export PATH="${HOME}/.bin:$PATH"
+export DFM_REPO="${HOME}/.dotfiles"
+if hash packer 2>/dev/null; then
+    export PACKER_CACHE_DIR="${HOME}/.packer_cache"
+fi
+
+# Lock and load a custom theme file location /.bash/themes/
+export BASH_IT_THEME='powerline-multiline'
+export THEME_PROMPT_CLOCK_FORMAT="%l:%M:%S"
+
+# Set mveditor/MacVim as EDITOR.
+if [ -f "${BASH_IT}/mveditor.sh" ]; then
+    export EDITOR="${BASH_IT}/mveditor.sh"
+    export GIT_EDITOR="${BASH_IT}/mveditor.sh"
+else
+    echo "WARNING: Can't find mac vim editor. Using vim instead."
+    export EDITOR="vim"
+    export GIT_EDITOR="vim"
+fi
+
+# Don't check mail when opening terminal.
+unset MAILCHECK
+
+# vim and gnome-terminal have support for 256 colours in fedora 8 at least
+# Note debian/ubuntu users need to install the ncurses-term package for this
+# Note this should be set in ~/.profile for Fedora startup scripts to
+# setup LS_COLORS correctly.
+if [[ $COLORTERM = gnome-* && $TERM = xterm ]]  && infocmp gnome-256color >/dev/null 2>&1; then
+    export TERM=gnome-256color
+elif infocmp xterm-256color >/dev/null 2>&1; then
+    export TERM=xterm-256color
+fi
+
+# General Startup #
+umask 002
+mesg n
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell
+
+# Check the window size after each command and, if necessary, update the values
+# of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob
+
+# Don't clear the screen after quitting a manual page
+export MANPAGER="less -X"
+
+# Change this to your console based IRC client of choice.
+export IRC_CLIENT='irssi'
+
+# Node Version Manager
+if hash brew 2>/dev/null; then
+    if [ x"" != x"$(brew ls --versions nvm)" ]; then
+        export NVM_TARGET="$(brew --prefix nvm)"
+        export NVM_DIR="/usr/local/nvm"
+        [[ -s "$NVM_TARGET/nvm.sh" ]] && source "$NVM_TARGET/nvm.sh" # Load NVM into a shell session *as a function*
+    fi
+fi
+
+# Load composure first, so we support function metadata
+source "${BASH_IT}/lib/composure.sh"
+
+# support 'plumbing' metadata
+cite _about _param _example _group _author _version
+
+# Load colors first so they can be use in base theme
+source "${BASH_IT}/themes/colors.theme.bash"
+source "${BASH_IT}/themes/base.theme.bash"
+
+# library
+LIB="${BASH_IT}/lib/*.bash"
+for config_file in $LIB
+do
+  source $config_file
+done
+
+# Load enabled aliases, completion, plugins
+for file_type in "aliases" "completion" "plugins"
+do
+  _load_bash_it_files $file_type
+done
+
+# Load custom aliases, completion, plugins
+for file_type in "aliases" "completion" "plugins"
+do
+  if [ -e "${BASH_IT}/${file_type}/custom.${file_type}.bash" ]
+  then
+    source "${BASH_IT}/${file_type}/custom.${file_type}.bash"
+  fi
+done
+
+unset config_file
+if [[ $PROMPT ]]; then
+    export PS1=$PROMPT
+fi
+
+# Adding Support for other OSes
+PREVIEW="less"
+[ -s /usr/bin/gloobus-preview ] && PREVIEW="gloobus-preview"
+[ -s /Applications/Preview.app ] && PREVIEW="/Applications/Preview.app"
+
+# Start Up Scripts #
+
+# fasd
+fasd_cache="$HOME/.fasd-init-bash"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+  fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
+
+# If you're running fzf in a large git repository, git ls-tree can boost up the speed of the traversal.
+export FZF_DEFAULT_COMMAND='
+  (git ls-tree -r --name-only HEAD ||
+   find * -name ".*" -prune -o -type f -print -o -type l -print) 2> /dev/null'
+
+# Custom (Machine-Specific) Startup #
+. ${BASH_IT}/custom.sh
+
+
+if [ $(uname) = "Darwin" ]; then
+    launchctl setenv PATH $PATH
+fi
+
