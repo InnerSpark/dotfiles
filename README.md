@@ -1,42 +1,40 @@
-# Spark's Dotfiles
+#  Spark Dotfiles
+___
 
-## Overview
+There has been to many times where I have had to configure a new server or computer from scratch. We all know how long this takes and how painful it can be to try and remember every app, every configuration and every tool we need or use day in and day out on each one of our computers or servers. This repo is here to help with that and to configure each and every one of my environments so that way I can spend more time doing what I love *(UX Design)* and less time configuring and setting up.
 
-This repo contains a utility ([dfm](https://github.com/justone/dfm)) to help with managing and updating of my dotfiles. 
+##  Getting Started
+The first step we need to do is figure out what we are setting up. Are we setting up a new OSX, a web server, a development environment *(ideally this would be the same as your web server)* or something else all together.
 
-**Note:** I am a UX Designer so most of these scripts are tailored for me and may not be the best for a developer.
+The first thing no mater what we are setting up is we need to get our Dotfiles installed from GitHub.
 
-## Using this repo
+	git clone git@github.com:innerspark/dotfiles.git $HOME/.dotfiles
 
-### Setup DFM
+Next lets have DFM install the dotfiles.
 
-First, fork this repo.
+	./.dotfiles/bin/dfm install
 
-Then, add your dotfiles:
+Ok so now we have our base setup. Wahoo!
 
-    $ git clone git@github.com:username/dotfiles.git .dotfiles
-    $ cd .dotfiles
-    $  # edit files
-    $  # edit files
-    $ git push origin master
+##  OSX Setup
 
-Finally, to install your dotfiles onto a new system:
+If we are setting up a new computer *(OSX)* then the first thing we are going to want to do is it up so that all the features we want and don't want configured on the base os are taken care of. This next script does just that for you.
 
-    $ cd $HOME
-    $ git clone git@github.com:username/dotfiles.git .dotfiles
-    $ ./.dotfiles/bin/dfm install # creates symlinks to install files
-    
+	./.dotfile/osx/setup.sh
 
-#### DFM Full documentation
+If you winder exactly what this script does, I would recommend opening it up and reading it. If you don't have the time for that, the best way i can describe it is that it runs allot of commands to change config setting in OSX that may or may not be useful.
 
-For more information, check out the [wiki](http://github.com/justone/dotfiles/wiki).
+## HomeBrew
 
-You can also run <tt>dfm --help</tt>.
+So I personaly use home brew to manage all my packages and applications. This next script will install the software that I use all the time, which allows me from having to go manualy download and install each one of them. In my opinion this thing is a life savor!
 
-### Run HomeBrew script
+	./.dotfiles/brew/install.sh
 
-	$ ./.dotfiles/homebrew/install.sh
+##  We Are All Done For Now
 
-### Run OS X Script
+Well thats it for now. If you have any tips or ideas to make my dotfiles better in anyway I'm always open for feed back. Thank you for your interest!
 
-	$ ./.dotfiles/osx/setup.sh
+### Sources
+
+ - DFM Full Documentation - [Wiki](http://github.com/justone/dotfiles/wiki) | [DFM GitHub](https://github.com/justone/dfm)
+ - HomeBrew - [Website](http://brew.sh/)
