@@ -39,7 +39,9 @@ brew install homebrew/dupes/grep
 
 binaries=(
   ack
+  boost
   hub
+  capnp
   cmus --with-ffmpeg
   cowsay
   elinks
@@ -47,17 +49,23 @@ binaries=(
   flac
   git
   gibo
+  google-sparsehash
   graphicsmagick
+  hg
   lame
   latex2html
   lua
   luajit
   mackup
+  mercurial
+  multimarkdown
+  ninja
   pandoc
   pandoc-citeproc
   par
   pdf2htmlex
   python
+  ragel
   ranger
   reattach-to-user-namespace
   rename
