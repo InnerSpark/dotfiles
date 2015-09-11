@@ -30,7 +30,6 @@ brew install homebrew/dupes/grep
 
 binaries=(
   ack
-  boost
   hub
   capnp
   cmus --with-ffmpeg
