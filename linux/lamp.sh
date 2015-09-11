@@ -30,7 +30,6 @@ brew install homebrew/dupes/grep
 
 binaries=(
   ack
-  apache
   boost
   hub
   capnp
@@ -44,6 +43,7 @@ binaries=(
   google-sparsehash
   graphicsmagick
   hg
+  http22
   lame
   latex2html
   lua
@@ -72,6 +72,6 @@ binaries=(
   xvid
   webkit2png
   )
-
+  
 echo "installing binaries..."
 brew install ${binaries[@]}
