@@ -43,7 +43,7 @@ binaries=(
   google-sparsehash
   graphicsmagick
   hg
-  http22
+  homebrew/http22
   lame
   latex2html
   lua
