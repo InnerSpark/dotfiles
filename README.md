@@ -8,7 +8,7 @@ The first step we need to do is figure out what we are setting up. Are we settin
 
 The first thing no mater what we are setting up is we need to get our Dotfiles installed from GitHub.
 
-	git clone git@github.com:innerspark/dotfiles.git $HOME/.dotfiles
+	git clone https://github.com/InnerSpark/dotfiles.git $HOME/.dotfiles
 
 Next lets have DFM install the dotfiles.
 
