@@ -43,7 +43,6 @@ binaries=(
   google-sparsehash
   graphicsmagick
   hg
-  homebrew/http22
   lame
   latex2html
   lua
@@ -75,3 +74,6 @@ binaries=(
   
 echo "installing binaries..."
 brew install ${binaries[@]}
+
+echo "Installing Apache2"
+brew install -v httpd22 --with-brewed-openssl
