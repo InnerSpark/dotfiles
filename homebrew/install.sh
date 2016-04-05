@@ -47,7 +47,6 @@ binaries=(
   flac
   git
   gibo
-  google-sparsehash
   graphicsmagick
   hg
   lame
