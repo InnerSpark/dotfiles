@@ -49,6 +49,7 @@ binaries=(
   gibo
   graphicsmagick
   hg
+  iterm2
   lame
   lua
   luajit
