@@ -28,7 +28,7 @@ If you winder exactly what this script does, I would recommend opening it up and
 
 So I personaly use home brew to manage all my packages and applications. This next script will install the software that I use all the time, which allows me from having to go manualy download and install each one of them. In my opinion this thing is a life savor!
 
-	./.dotfiles/brew/install.sh
+	./.dotfiles/homebrew/install.sh
 
 ##  We Are All Done For Now
 

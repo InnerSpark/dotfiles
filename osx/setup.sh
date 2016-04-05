@@ -194,7 +194,7 @@ echo "Enabling snap-to-grid for icons on the desktop and in other icon views"
 # Wipe all (default) app icons from the Dock
 # This is only really useful when setting up a new Mac, or if you donÃ¢â‚¬â„¢t use
 # the Dock to launch apps.
-#defaults write com.apple.dock persistent-apps -array
+defaults write com.apple.dock persistent-apps -array
 
 echo ""
 echo "Setting the icon size of Dock items to 36 pixels for optimal size/screen-realestate"
@@ -211,6 +211,10 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0
 
+echo ""
+echo "Cleaning up the mac dock so that it stays empty and shows what apps are hidden."
+defaults write com.apple.dock static-only -bool TRUE
+defaults write com.apple.dock showhidden -bool TRUE
 
 ###############################################################################
 # Safari & WebKit
