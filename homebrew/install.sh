@@ -42,10 +42,8 @@ binaries=(
   boost
   hub
   capnp
-  cmus --with-ffmpeg
   cowsay
   elinks
-  ffmpeg
   flac
   git
   gibo
@@ -53,7 +51,6 @@ binaries=(
   graphicsmagick
   hg
   lame
-  latex2html
   lua
   luajit
   mackup
@@ -78,6 +75,9 @@ binaries=(
   wget
   xvid
   webkit2png
+  latex2html
+  ffmpeg
+  cmus --with-ffmpeg
   )
 
 echo "installing binaries..."
@@ -150,21 +150,35 @@ brew tap caskroom/fonts
 
 # fonts
 fonts=(
-  font-inconsolata
-  font-inconsolata-for-powerline
-  font-inconsolata-dz-for-powerline
-  font-inconsolata-lgc
-  font-droid-sans-mono-for-powerline
-  font-fira-mono-for-powerline
-  font-meslo-lg-for-powerline
-  font-sauce-code-powerline
-  font-source-code-pro-for-powerline
-  font-ubuntu-mono-powerline
+	font-anonymous-pro \
+	font-dejavu-sans-mono-for-powerline \
+	font-droid-sans \
+	font-droid-sans-mono font-droid-sans-mono-for-powerline \
+	font-meslo-lg font-input \
+	font-inconsolata font-inconsolata-for-powerline \
+	font-liberation-mono font-liberation-mono-for-powerline \
+	font-liberation-sans \
+	font-meslo-lg \
+	font-nixie-one \
+	font-office-code-pro \
+	font-pt-mono \
+	font-roboto \
+	font-source-code-pro font-source-code-pro-for-powerline \
+	font-source-sans-pro \
+	font-ubuntu font-ubuntu-mono-powerline
 )
 
 # install fonts
 echo "installing fonts..."
 brew cask install ${fonts[@]}
+
+# brew cask quicklook
+echo_warn "Installing QuickLook Plugins..."
+brew cask install \
+	qlcolorcode qlmarkdown qlprettypatch qlstephen \
+	qlimagesize \
+	quicklook-csv quicklook-json epubquicklook \
+	animated-gif-quicklook
 
 # Install vim 
 brew install macvim --with-lua --with-luajit --custom-icons --override-system-vim

@@ -10,7 +10,31 @@
 # Ask for the administrator password upfront
 sudo -v
 
-echo "This script will make your Mac awesome"
+echo "This script will make your Mac awesome!!!"
+
+# Settings
+node_version="0.12.2"
+ruby_versions="1.9 2.1 2.2"
+ruby_default="2.1"
+
+# helpers
+function echo_ok { echo -e '\033[1;32m'"$1"'\033[0m'; }
+function echo_warn { echo -e '\033[1;33m'"$1"'\033[0m'; }
+function echo_error  { echo -e '\033[1;31mERROR: '"$1"'\033[0m'; }
+
+echo_ok "Install starting. You may be asked for your password (for sudo)."
+
+# requires xcode and tools!
+xcode-select -p || exit "XCode must be installed! (use the app store)"
+
+# requirements
+cd ~
+mkdir -p tmp
+echo_warn "setting permissions..."
+for dir in "/usr/local /usr/local/bin /usr/local/include /usr/local/lib /usr/local/share"; do
+	sudo chgrp admin $dir
+	sudo chmod g+w $dir
+done
 
 ###############################################################################
 # General UI/UX
@@ -198,7 +222,7 @@ defaults write com.apple.dock persistent-apps -array
 
 echo ""
 echo "Setting the icon size of Dock items to 36 pixels for optimal size/screen-realestate"
-defaults write com.apple.dock tilesize -int 36
+defaults write com.apple.dock tilesize -int 16
 
 echo ""
 echo "Speeding up Mission Control animations and grouping windows by application"
@@ -351,3 +375,4 @@ sudo nvram boot-args="-v"
 ###############################################################################
 
 echo "Done!"
+killall Dock
