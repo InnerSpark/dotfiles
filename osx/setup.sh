@@ -36,6 +36,10 @@ for dir in "/usr/local /usr/local/bin /usr/local/include /usr/local/lib /usr/loc
 	sudo chmod g+w $dir
 done
 
+# Install HomeBrew
+echo "Installing Homebrew! Yay!!!!"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 ###############################################################################
 # General UI/UX
 ###############################################################################
