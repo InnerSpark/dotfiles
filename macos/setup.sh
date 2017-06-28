@@ -61,6 +61,10 @@ echo "Installing Homebrew! Yay!!!!"
 # sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 
 echo ""
+echo "Toggle Dark Mode  with command, option, control and T"
+sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true
+
+echo ""
 echo "Disabling OS X Gate Keeper"
 echo "(You'll be able to install any app you want from here on, not just Mac App Store apps)"
 sudo spctl --master-disable
@@ -70,10 +74,6 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 echo ""
 echo "Increasing the window resize speed for Cocoa applications"
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
-
-echo ""
-echo "Hide desktop icons"
-defaults write com.apple.finder CreateDesktop true
 
 echo ""
 echo "Expanding the save panel by default"
@@ -157,10 +157,10 @@ defaults write com.apple.BezelServices kDimTime -int 300
 # Screen
 ###############################################################################
 
-# echo ""
-# echo "Requiring password immediately after sleep or screen saver begins"
-# defaults write com.apple.screensaver askForPassword -int 1
-# defaults write com.apple.screensaver askForPasswordDelay -int 0
+echo ""
+echo "Requiring password immediately after sleep or screen saver begins"
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 echo ""
 echo "Enabling subpixel font rendering on non-Apple LCDs"
@@ -174,9 +174,14 @@ sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutio
 # Finder
 ###############################################################################
 
+
+echo ""
+echo "Show desktop icons"
+defaults write com.apple.finder CreateDesktop false
+
 echo ""
 echo "Showing icons for hard drives, servers, and removable media on the desktop"
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
 
 echo ""
 echo "Showing all filename extensions in Finder by default"
@@ -395,3 +400,4 @@ brew cask install $(<~/.dotfiles/homebrew/cask_packages.txt)
 
 echo "Done!"
 killall Dock
+mvim ~/.dotfiles/NOTES.md
