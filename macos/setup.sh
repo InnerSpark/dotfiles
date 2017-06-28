@@ -72,10 +72,6 @@ echo "Increasing the window resize speed for Cocoa applications"
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 echo ""
-echo "Hide desktop icons"
-defaults write com.apple.finder CreateDesktop true
-
-echo ""
 echo "Expanding the save panel by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
@@ -157,10 +153,10 @@ defaults write com.apple.BezelServices kDimTime -int 300
 # Screen
 ###############################################################################
 
-# echo ""
-# echo "Requiring password immediately after sleep or screen saver begins"
-# defaults write com.apple.screensaver askForPassword -int 1
-# defaults write com.apple.screensaver askForPasswordDelay -int 0
+echo ""
+echo "Requiring password immediately after sleep or screen saver begins"
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 echo ""
 echo "Enabling subpixel font rendering on non-Apple LCDs"
@@ -174,9 +170,14 @@ sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutio
 # Finder
 ###############################################################################
 
+
+echo ""
+echo "Show desktop icons"
+defaults write com.apple.finder CreateDesktop false
+
 echo ""
 echo "Showing icons for hard drives, servers, and removable media on the desktop"
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
 
 echo ""
 echo "Showing all filename extensions in Finder by default"
