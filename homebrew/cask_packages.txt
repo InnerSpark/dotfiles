@@ -52,13 +52,8 @@ imagealpha
 imagemin
 imageoptim
 istat-menus
-iterm2-beta
 java
-karabiner
-launchbar
-launchcontrol
 macpass
-mactex
 omnifocus
 omnifocus-clip-o-tron
 omnigraffle
