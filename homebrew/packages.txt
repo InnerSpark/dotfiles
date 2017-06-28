@@ -191,6 +191,7 @@ netcat
 netpbm
 nettle
 nmap
+node
 npth
 nvm
 openconnect
