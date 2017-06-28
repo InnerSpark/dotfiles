@@ -30,6 +30,12 @@ So I personaly use home brew to manage all my packages and applications. This ne
 
 	./.dotfiles/homebrew/install.sh
 
+### Install Packages
+    brew install $(<~/.dotfiles/homebrew/packages.txt)
+
+### Install Cask Packages
+    brew cask install $(<~/.dotfiles/homebrew/cask_packages.txt)
+
 ##  We Are All Done For Now
 
 Well thats it for now. If you have any tips or ideas to make my dotfiles better in anyway I'm always open for feed back. Thank you for your interest!

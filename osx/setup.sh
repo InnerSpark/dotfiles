@@ -235,7 +235,7 @@ defaults write com.apple.dock "expose-group-by-app" -bool true
 
 echo ""
 echo "Setting Dock to auto-hide and removing the auto-hiding delay"
-defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool false
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0
 
@@ -370,9 +370,16 @@ echo ""
 echo "Disable annoying backswipe in Chrome"
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 
+# echo ""
+# echo "Always boot in verbose mode"
+# sudo nvram boot-args="-v"
+
+###############################################################################
+# HomeBrew Installs
+###############################################################################
 echo ""
-echo "Always boot in verbose mode"
-sudo nvram boot-args="-v"
+echo "Installing fonts through HomeBrew"
+brew cask install font-anonymous-pro-for-powerline font-arial font-bebas-neue font-dejavu-sans-mono-for-powerline font-droid-sans-mono-for-powerline font-fira-mono-for-powerline font-fira-sans font-hasklig font-inconsolata font-inconsolata-dz-for-powerline font-inconsolata-for-powerline font-inconsolata-g-for-powerline font-liberation-mono-for-powerline font-meslo-lg-for-powerline font-open-iconic font-open-sans font-raleway font-sauce-code-powerline font-source-code-pro font-source-code-pro-for-powerline font-ubuntu-mono-powerline
 
 ###############################################################################
 # Kill affected applications
