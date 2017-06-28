@@ -108,6 +108,7 @@ hicolor-icon-theme
 highlight
 htmlcleaner
 httpie
+ical-buddy
 icu4c
 id3tool
 ilmbase
@@ -190,6 +191,7 @@ netcat
 netpbm
 nettle
 nmap
+node
 npth
 nvm
 openconnect

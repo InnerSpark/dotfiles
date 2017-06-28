@@ -144,6 +144,7 @@ So I personaly use home brew to manage all my packages and applications. This ne
 * highlight
 * htmlcleaner
 * httpie
+* ical-buddy
 * icu4c
 * id3tool
 * ilmbase
