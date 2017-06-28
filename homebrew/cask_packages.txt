@@ -103,3 +103,4 @@ vmware-fusion
 webpquicklook
 webstorm
 witch
+xquartz
