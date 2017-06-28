@@ -271,7 +271,6 @@ webalizer
 webkit2png
 webp
 wget
-wine
 wrk
 x264
 xmlto
