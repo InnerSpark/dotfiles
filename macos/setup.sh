@@ -400,3 +400,4 @@ brew cask install $(<~/.dotfiles/homebrew/cask_packages.txt)
 
 echo "Done!"
 killall Dock
+mvim ~/.dotfiles/NOTES.md
