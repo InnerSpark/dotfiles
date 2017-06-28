@@ -52,6 +52,7 @@ handbrakecli
 imagealpha
 imagemin
 imageoptim
+iterm2
 istat-menus
 java
 macpass
