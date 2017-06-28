@@ -2,6 +2,7 @@ adobe-creative-cloud
 amazon-cloud-drive
 animated-gif-quicklook
 app-tamer
+appzapper
 atom
 bartender
 bettertouchtool
