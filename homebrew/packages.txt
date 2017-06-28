@@ -172,6 +172,7 @@ lynx
 lzlib
 lzo
 macvim
+mackup
 mad
 makedepend
 maven
