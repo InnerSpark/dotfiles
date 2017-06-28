@@ -13,7 +13,7 @@ sudo -v
 echo "This script will make your Mac awesome!!!"
 
 # Settings
-node_version="0.12.2"
+node_version="6.11.0"
 ruby_versions="1.9 2.1 2.2"
 ruby_default="2.1"
 
