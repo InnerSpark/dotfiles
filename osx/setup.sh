@@ -379,11 +379,15 @@ defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 # sudo nvram boot-args="-v"
 
 ###############################################################################
-# HomeBrew Installs
+# HomeBrew Package Installs
 ###############################################################################
 echo ""
-echo "Installing fonts through HomeBrew"
-brew cask install font-anonymous-pro-for-powerline font-arial font-bebas-neue font-dejavu-sans-mono-for-powerline font-droid-sans-mono-for-powerline font-fira-mono-for-powerline font-fira-sans font-hasklig font-inconsolata font-inconsolata-dz-for-powerline font-inconsolata-for-powerline font-inconsolata-g-for-powerline font-liberation-mono-for-powerline font-meslo-lg-for-powerline font-open-iconic font-open-sans font-raleway font-sauce-code-powerline font-source-code-pro font-source-code-pro-for-powerline font-ubuntu-mono-powerline
+echo "Install Homebrew Packages"
+brew install $(<~/.dotfiles/homebrew/packages.txt)
+
+echo ""
+echo "Install Homebrew Cask Packages"
+brew cask install $(<~/.dotfiles/homebrew/cask_packages.txt)
 
 ###############################################################################
 # Kill affected applications
