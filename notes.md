@@ -116,6 +116,7 @@
 * highlight
 * htmlcleaner
 * httpie
+* ical-buddy
 * icu4c
 * id3tool
 * ilmbase
