@@ -10,6 +10,7 @@ bittorrent-sync
 calibre
 cheatsheet
 controlplane
+dropbox
 dropzone
 ember
 epubquicklook
@@ -44,6 +45,7 @@ github
 gitup
 goodsync
 googleappengine
+google-drive
 handbrake
 handbrakecli
 imagealpha
