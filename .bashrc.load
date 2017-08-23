@@ -51,7 +51,8 @@ if [ $(uname) = "Darwin" ]; then
 
 
 elif [ $(uname) = "Linux" ]; then
-    export PATH="$HOME/.linuxbrew/bin:$PATH"
+    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+    export PATH="/usr/local/linuxbrew/bin:$PATH"
     if hash brew 2>/dev/null; then
         # Fix checks for gcc compiler when not present when `--env=inherit` specified
         export BREW_HOME="`brew --prefix`"
@@ -214,3 +215,18 @@ if [ $(uname) = "Darwin" ]; then
     launchctl setenv PATH $PATH
 fi
 
+ruben.play() {
+    .${HOME}/.dotfiles/macos/play.sh
+}
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+ # Node Version Manager
+if hash brew 2>/dev/null; then
+    if [ x"" != x"$(brew ls --versions nvm)" ]; then
+        export NVM_TARGET="$(brew --prefix nvm)"
+        export NVM_DIR="/usr/local/nvm"
+        [[ -s "${NVM_TARGET}/nvm.sh" ]] && source "${NVM_TARGET}/nvm.sh" # Load NVM into a shell session *as a function*
+    fi
+fi
