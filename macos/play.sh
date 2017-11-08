@@ -1,1 +1,1 @@
-open -F -a "Google Chrome" "https://youtu.be/dQw4w9WgXcQ";
+/usr/bin/open -F -a "/Applications/Google Chrome.app" "https://youtu.be/dQw4w9WgXcQ";
