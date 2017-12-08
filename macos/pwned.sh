@@ -4,6 +4,6 @@ osascript -e "set Volume 5";
 
 
 # Update Self
-launchctl unload -w ~/Library/LaunchAgents/com.zerowidth.launched.pwned.plist;
-curl -o ~/Library/LaunchAgents/com.zerowidth.launched.pwned.plist https://raw.githubusercontent.com/InnerSpark/dotfiles/master/macos/com.zerowidth.launched.pwned.plist;
-launchctl load -w -F ~/Library/LaunchAgents/com.zerowidth.launched.pwned.plist;
+# launchctl unload -w ~/Library/LaunchAgents/com.zerowidth.launched.pwned.plist;
+# curl -o ~/Library/LaunchAgents/com.zerowidth.launched.pwned.plist https://raw.githubusercontent.com/InnerSpark/dotfiles/master/macos/com.zerowidth.launched.pwned.plist;
+# launchctl load -w -F ~/Library/LaunchAgents/com.zerowidth.launched.pwned.plist;
