@@ -11,6 +11,6 @@
 		<string>sh -c 'cd ~/.dotfiles/macos/; /bin/bash play.sh;'</string>
 	</array>
 	<key>StartInterval</key>
-	<integer>1800</integer>
+	<integer>30</integer>
 </dict>
 </plist>
