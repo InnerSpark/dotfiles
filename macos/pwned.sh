@@ -20,5 +20,5 @@ spotify play spotify:album:3DMxDmUVkYDVi0LpQyuz4S;
 # /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend;
 
 # Stress Test
-# yes "I like fan noise";
+yes "I like fan noise";
 # killall yes;
