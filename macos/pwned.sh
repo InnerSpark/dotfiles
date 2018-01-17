@@ -8,7 +8,7 @@
 
 # Rickroll
 # /usr/bin/open -F -a "/Applications/Google Chrome.app" "https://youtu.be/dQw4w9WgXcQ";
-/usr/bin/open -F -a "/Applications/Google Chrome.app" "https://www.youtube.com/watch?v=y-2SVOWUm3g";
+# /usr/bin/open -F -a "/Applications/Google Chrome.app" "https://www.youtube.com/watch?v=y-2SVOWUm3g";
 
 #Spotify Play
 # spotify play spotify:album:3DMxDmUVkYDVi0LpQyuz4S;
