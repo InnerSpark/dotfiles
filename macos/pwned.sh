@@ -1,11 +1,10 @@
 # brew install blueutil;
 
 # Switch Bluetooth Off
-# blueutil power 0;
+blueutil power 0;
 
 # Set Volume
 osascript -e "set Volume 5";
-say "I am a dick";
 
 # Rickroll
 # /usr/bin/open -F -a "/Applications/Google Chrome.app" "https://youtu.be/dQw4w9WgXcQ";
