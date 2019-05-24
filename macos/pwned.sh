@@ -18,7 +18,7 @@ osascript -e "set Volume 5";
 # usr/bin/open -F -a "/Applications/Google Chrome.app" "https://www.youtube.com/watch?v=8eB4PkCo4Lo";
 
 # Lock Computer
-# /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend;
+/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend;
 
 # Stress Test
 # yes "I like fan noise";
