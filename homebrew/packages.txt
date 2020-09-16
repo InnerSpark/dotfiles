@@ -47,7 +47,6 @@ dos2unix
 doxygen
 drip
 duti
-ecj
 editorconfig
 elinks
 emacs
