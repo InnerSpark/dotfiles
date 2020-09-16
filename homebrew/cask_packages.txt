@@ -27,7 +27,6 @@ font-liberation-mono-for-powerline
 font-open-iconic
 font-open-sans
 font-raleway
-font-sauce-code-powerline
 font-source-code-pro
 font-source-code-pro-for-powerline
 font-ubuntu-mono-powerline
