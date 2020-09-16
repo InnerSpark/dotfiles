@@ -8,7 +8,6 @@ calibre
 cheatsheet
 controlplane
 dropbox
-ember
 epubquicklook
 expandrive
 figma
