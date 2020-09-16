@@ -4,7 +4,6 @@ appzapper
 atom
 bartender
 bettertouchtool
-betterzipql
 bittorrent-sync
 calibre
 cheatsheet
