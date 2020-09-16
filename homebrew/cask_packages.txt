@@ -29,7 +29,6 @@ font-open-sans
 font-raleway
 font-source-code-pro
 font-source-code-pro-for-powerline
-font-ubuntu-mono-powerline
 forklift
 gas-mask
 github
