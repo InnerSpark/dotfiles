@@ -4,7 +4,6 @@ appzapper
 atom
 bartender
 bettertouchtool
-bittorrent-sync
 calibre
 cheatsheet
 controlplane
@@ -59,7 +58,6 @@ omnifocus-clip-o-tron
 omnigraffle
 omnioutliner
 omniplan
-plex-home-theater
 qlcolorcode
 qlimagesize
 qlmarkdown
@@ -93,9 +91,7 @@ ttscoff-mmd-quicklook
 ubersicht
 vagrant
 vagrant-manager
-virtualbox
 vlc
-vmware-fusion
 webpquicklook
 webstorm
 witch
