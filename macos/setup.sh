@@ -253,6 +253,10 @@ echo "Cleaning up the mac dock so that it stays empty and shows what apps are hi
 defaults write com.apple.dock static-only -bool TRUE
 defaults write com.apple.dock showhidden -bool TRUE
 
+echo ""
+echo "Move doc to left side"
+defaults write com.apple.dock orientation left
+
 ###############################################################################
 # Safari & WebKit
 ###############################################################################
