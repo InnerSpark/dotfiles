@@ -1,5 +1,4 @@
 adobe-creative-cloud
-animated-gif-quicklook
 app-tamer
 appzapper
 atom
