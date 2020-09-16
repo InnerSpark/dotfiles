@@ -44,7 +44,6 @@ istat-menus
 java11
 macpass
 omnifocus
-omnifocus-clip-o-tron
 omnigraffle
 omnioutliner
 omniplan
