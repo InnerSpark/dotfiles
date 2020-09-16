@@ -206,7 +206,6 @@ pinentry
 pixman
 pkg-config
 plantuml
-plt-racket
 pmd
 pngcrush
 pngnq
