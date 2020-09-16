@@ -100,7 +100,6 @@ gtk+
 gts
 haproxy
 harfbuzz
-heroku-toolbelt
 hicolor-icon-theme
 highlight
 htmlcleaner
