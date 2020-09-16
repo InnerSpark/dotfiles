@@ -36,7 +36,6 @@ cowsay
 cscope
 ctags
 curl
-curlish
 czmq
 dateutils
 dcraw
