@@ -16,6 +16,7 @@ dropzone
 ember
 epubquicklook
 expandrive
+figma
 firefox
 firefoxdeveloperedition
 flash
