@@ -12,7 +12,6 @@ epubquicklook
 expandrive
 figma
 firefox
-flash
 font-anonymous-pro-for-powerline
 font-arial
 font-bebas-neue
