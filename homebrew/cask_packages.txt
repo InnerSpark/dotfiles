@@ -59,7 +59,6 @@ querious
 quicklook-csv
 quicklook-json
 quicknfo
-quotefix
 rightfont
 rubymine
 seil
