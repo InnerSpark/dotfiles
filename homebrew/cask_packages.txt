@@ -24,7 +24,6 @@ font-inconsolata-dz-for-powerline
 font-inconsolata-for-powerline
 font-inconsolata-g-for-powerline
 font-liberation-mono-for-powerline
-font-meslo-lg-for-powerline
 font-open-iconic
 font-open-sans
 font-raleway
