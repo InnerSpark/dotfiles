@@ -8,7 +8,6 @@ calibre
 cheatsheet
 controlplane
 dropbox
-dropzone
 ember
 epubquicklook
 expandrive
