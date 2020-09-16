@@ -67,7 +67,6 @@ spamsieve
 staruml
 suspicious-package
 textexpander
-the-escapers-flux
 tower
 ttscoff-mmd-quicklook
 ubersicht
