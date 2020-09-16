@@ -244,6 +244,7 @@ ssh-copy-id
 sslmate
 stow
 surfraw
+svn
 taglib
 texi2html
 the_silver_searcher
