@@ -144,7 +144,6 @@ liblqr
 libmpc
 libogg
 libpng
-libpng12
 libquvi
 librsvg
 libsigsegv
