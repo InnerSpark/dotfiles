@@ -61,7 +61,6 @@ quicklook-json
 quicknfo
 rightfont
 rubymine
-seil
 serf
 sigil
 sketch
