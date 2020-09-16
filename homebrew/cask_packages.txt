@@ -41,7 +41,7 @@ imagemin
 imageoptim
 iterm2
 istat-menus
-java
+java11
 macpass
 omnifocus
 omnifocus-clip-o-tron
