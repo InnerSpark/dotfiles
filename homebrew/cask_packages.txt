@@ -80,6 +80,7 @@ rubymine
 seil
 serf
 sigil
+sketch
 sling
 sonos
 spamsieve
