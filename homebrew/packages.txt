@@ -39,7 +39,6 @@ curl
 czmq
 dateutils
 dcraw
-deisctl
 dnsmasq
 docbook
 docbook-xsl
