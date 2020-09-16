@@ -12,7 +12,6 @@ epubquicklook
 expandrive
 figma
 firefox
-firefoxdeveloperedition
 flash
 font-anonymous-pro-for-powerline
 font-arial
