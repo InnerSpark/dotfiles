@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-
-
 # Ask for the administrator password upfront.
 sudo -v
 
@@ -87,7 +84,6 @@ brew tap homebrew/cask
 # Apps
 apps=(
   adobe-creative-cloud
-  airmail-amt
   appzapper
   arq
   avocode
@@ -125,7 +121,7 @@ apps=(
   skype
   spotify
   todoist
-  transmission
+  transmission-cli
   things
   virtualbox
   vlc

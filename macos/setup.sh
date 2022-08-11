@@ -371,11 +371,18 @@ defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 ###############################################################################
 echo ""
 echo "Install Homebrew Packages"
-brew install $(<~/.dotfiles/homebrew/packages.txt)
+./.dotfiles/homebrew/install.sh
 
-echo ""
-echo "Install Homebrew Cask Packages"
-brew cask install $(<~/.dotfiles/homebrew/cask_packages.txt)
+
+
+###### OLD
+# echo ""
+# echo "Install Homebrew Packages"
+# brew install $(<~/.dotfiles/homebrew/packages.txt)
+
+# echo ""
+# echo "Install Homebrew Cask Packages"
+# brew cask install $(<~/.dotfiles/homebrew/cask_packages.txt)
 
 ###############################################################################
 # Kill affected applications
