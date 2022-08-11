@@ -15,14 +15,14 @@ xcode-select --install
 # Install if we don't have it
 if test ! $(which brew); then
   echo "Installing homebrew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 # Update homebrew recipes
 brew update
 
 # Upgrade any already-installed formulae.
-brew upgrade --all
+brew upgrade
 
 # Install GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
@@ -34,9 +34,6 @@ brew install findutils
 brew install bash
 
 # Install more recent versions of some OS X tools
-brew tap homebrew/dupes
-brew install homebrew/dupes/grep
-
 binaries=(
   ack
   boost
@@ -76,7 +73,7 @@ binaries=(
   webkit2png
   latex2html
   ffmpeg
-  cmus --with-ffmpeg
+  cmus
   )
 
 echo "installing binaries..."
@@ -84,23 +81,20 @@ brew install ${binaries[@]}
 
 # Install Brew Cask for Mac Apps
 
-brew install caskroom/cask/brew-cask
-brew tap caskroom/versions
+brew install homebrew/cask
+brew tap homebrew/cask
 
 # Apps
 apps=(
-  adium
   adobe-creative-cloud
   airmail-amt
   appzapper
   arq
   avocode
-  axure-rp-pro
-  backblaze
   bartender
+  brave-browser
   caffeine
   carbon-copy-cloner
-  cleanmymac
   dropbox
   dropzone
   easyfind
@@ -122,6 +116,7 @@ apps=(
   mou
   spectacle
   path-finder
+  parallels
   pdfsam-basic
   photoninja
   proctools
@@ -129,6 +124,7 @@ apps=(
   slack
   skype
   spotify
+  todoist
   transmission
   things
   virtualbox
@@ -136,16 +132,15 @@ apps=(
   1password
   qlmarkdown
   quicklook-json
-  wacom-tablet
   )
 
 # Install apps to /Applications
 # Default is: /Users/$user/Applications
 echo "installing apps..."
-brew cask install --appdir="/Applications" ${apps[@]}
+brew install --cask --appdir="/Applications" ${apps[@]}
 
 # install font set up
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 
 # fonts
 fonts=(
@@ -169,18 +164,18 @@ fonts=(
 
 # install fonts
 echo "installing fonts..."
-brew cask install ${fonts[@]}
+brew install --cask ${fonts[@]}
 
 # brew cask quicklook
 echo_warn "Installing QuickLook Plugins..."
-brew cask install \
+brew install --cask \
 	qlcolorcode qlmarkdown qlprettypatch qlstephen \
 	qlimagesize \
 	quicklook-csv quicklook-json epubquicklook \
 	animated-gif-quicklook
 
 # Install vim 
-brew install macvim --with-lua --with-luajit --custom-icons --override-system-vim
+brew install macvim
 
 # Change path so Homebrew packages get priority
 $PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH

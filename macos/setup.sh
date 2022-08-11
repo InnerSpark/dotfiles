@@ -13,9 +13,9 @@ sudo -v
 echo "This script will make your Mac awesome!!!"
 
 # Settings
-node_version="6.11.0"
-ruby_versions="1.9 2.1 2.2"
-ruby_default="2.1"
+node_version="16.9.0"
+ruby_versions="1.9 2.1 2.2 3.1"
+ruby_default="3.1"
 
 # helpers
 function echo_ok { echo -e '\033[1;32m'"$1"'\033[0m'; }
@@ -38,27 +38,11 @@ done
 
 # Install HomeBrew
 echo "Installing Homebrew! Yay!!!!"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 ###############################################################################
 # General UI/UX
 ###############################################################################
-
-# echo ""
-# echo "Hide the Time Machine, Volume, User, and Bluetooth icons"
-# for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-#   defaults write "${domain}" dontAutoLoad -array \
-#     "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-#     "/System/Library/CoreServices/Menu Extras/Volume.menu" \
-#     "/System/Library/CoreServices/Menu Extras/User.menu"
-# done
-# defaults write com.apple.systemuiserver menuExtras -array \
-#   "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-#   "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-#   "/System/Library/CoreServices/Menu Extras/Battery.menu" \
-#   "/System/Library/CoreServices/Menu Extras/Clock.menu"
-
-# sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 
 echo ""
 echo "Toggle Dark Mode  with command, option, control and T"
@@ -85,7 +69,6 @@ echo ""
 echo "Automatically quit printer app once the print jobs complete"
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-# Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 echo ""
 echo "Displaying ASCII control characters using caret notation in standard text views"
 defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
@@ -105,10 +88,6 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 echo ""
 echo "Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-
-# echo ""
-# echo "Never go into computer sleep mode"
-# systemsetup -setcomputersleep Off > /dev/null
 
 echo ""
 echo "Check for software updates daily, not just once per week"
@@ -176,11 +155,11 @@ sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutio
 
 
 echo ""
-echo "Show desktop icons"
+echo "Hide desktop icons"
 defaults write com.apple.finder CreateDesktop false
 
 echo ""
-echo "Showing icons for hard drives, servers, and removable media on the desktop"
+echo "Hide icons for hard drives, servers, and removable media on the desktop"
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
 
 echo ""
