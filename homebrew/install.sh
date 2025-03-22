@@ -1,7 +1,6 @@
 # Ask for the administrator password upfront.
 sudo -v
 
-
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
@@ -13,6 +12,8 @@ xcode-select --install
 if test ! $(which brew); then
   echo "Installing homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/mike.binder/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Update homebrew recipes
@@ -122,8 +123,6 @@ apps=(
   spotify
   todoist
   transmission-cli
-  things
-  virtualbox
   vlc
   1password
   qlmarkdown
@@ -172,6 +171,9 @@ brew install --cask \
 
 # Install vim 
 brew install macvim
+
+# Install Figma
+brew install --cask figma
 
 # Change path so Homebrew packages get priority
 $PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH

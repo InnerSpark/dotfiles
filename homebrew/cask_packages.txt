@@ -1,13 +1,3 @@
-adobe-creative-cloud
-app-tamer
-appzapper
-atom
-bartender
-bettertouchtool
-calibre
-cheatsheet
-controlplane
-dropbox
 epubquicklook
 expandrive
 figma
