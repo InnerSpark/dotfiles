@@ -38,7 +38,6 @@ cask "jordanbaird-ice"                # menu bar manager (Ice)
 cask "1password"
 cask "google-chrome"
 cask "firefox"
-cask "slack"
 cask "notion"                         # notes / docs
 cask "granola"                        # AI meeting notes
 

@@ -6,3 +6,6 @@ ssh/config.local
 
 # Machine-local git identity overrides
 .gitconfig.local
+
+# brew bundle may drop a lockfile here; not worth tracking
+Brewfile.lock.json

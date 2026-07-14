@@ -32,7 +32,7 @@ fragments that profile needs.
 |---|---|---|
 | `desktop` | M4 Studio, M1 Studio | common + design + dev + personal + desktop |
 | `laptop`  | personal MacBook Pro, Mac Mini | common + design + dev + personal |
-| `work`    | work MacBook Pro | common + design + dev (prompts for work git email) |
+| `work`    | work MacBook Pro | common + design + dev (prompts for work git email + comms apps) |
 | `server`  | Debian/Ubuntu boxes | runs `server/bootstrap.sh` (see Servers) |
 
 Force a profile explicitly: `./install.sh work`.
@@ -48,7 +48,7 @@ CLI: `starship`, `zsh-autosuggestions`, `zsh-syntax-highlighting`, `git`, `gh`,
 `fzf`, `zoxide`, `eza`, `bat`, `ripgrep`, `fd`, `jq`, `tree`, `wget`,
 `shellcheck`, `tlrc`, `fnm`, `ffmpeg`, `imagemagick`.
 
-Apps: iTerm2, Raycast, Ice, 1Password, Google Chrome, Firefox, Slack, Notion,
+Apps: iTerm2, Raycast, Ice, 1Password, Google Chrome, Firefox, Notion,
 Granola, Claude (desktop), Claude Code.
 
 Font: JetBrains Mono Nerd Font.
@@ -64,7 +64,14 @@ VS Code, OrbStack (Docker runtime), TablePlus, Proxyman, Bruno.
 
 ### Personal — desktop, laptop (kept off the work machine)
 
-Spotify, VLC, HandBrake, Dropbox, Google Drive.
+Spotify, VLC, HandBrake, Dropbox, Google Drive, Slack, Zoom, Microsoft Teams,
+Telegram.
+
+### Work comms — work profile
+
+The `work` profile does not install the personal comms apps. Instead it asks
+which to install (`slack zoom teams telegram`, or `all` / `none`) and remembers
+the answer in `~/.dotfiles-work-comms`.
 
 ### Desktop-only — desktop
 
@@ -131,3 +138,20 @@ The prompt needs a Nerd Font; the Brewfile installs JetBrains Mono Nerd Font.
 `zoxide` replaces fasd (`z <partial>`), `fnm` replaces nvm, `eza` backs the
 `ls` aliases, and OrbStack provides the `docker` CLI. Claude Code and the
 Claude desktop app are in the common layer.
+
+## Disclaimer
+
+These scripts modify system settings, install software, run with `sudo`, and
+(on servers) change SSH and firewall configuration. Read them before running
+on a machine you care about. Provided as-is, with no warranty; use at your own
+risk.
+
+## Credits
+
+`macos/defaults.sh` descends from the "OSX for Hackers" gist and the
+mathiasbynens/dotfiles lineage, trimmed to keys that still work on current
+macOS.
+
+## License
+
+MIT. See [LICENSE](LICENSE).

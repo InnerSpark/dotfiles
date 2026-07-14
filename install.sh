@@ -125,7 +125,17 @@ if ! command -v brew >/dev/null; then
   exit 1
 fi
 
-bundle() { echo "==> brew bundle: $1"; brew bundle --file="$DOTFILES/$1"; }
+# Tolerate per-app failures (already-installed apps, license sign-ins) so one
+# hiccup doesn't abort the whole run under `set -e`.
+bundle() {
+  echo "==> brew bundle: $1"
+  brew bundle --file="$DOTFILES/$1" \
+    || echo "!!  some entries in $1 need attention (see above); continuing"
+}
+cask_install() {
+  echo "==> brew install --cask $1"
+  brew install --cask "$1" || echo "!!  $1 needs attention (see above); continuing"
+}
 
 bundle Brewfile                                   # common, always
 case "$PROFILE" in
@@ -145,6 +155,34 @@ case "$PROFILE" in
     bundle brew/desktop.Brewfile
     ;;
 esac
+
+# Work comms: pick which chat/meeting apps to install (asked once, remembered).
+if [ "$PROFILE" = "work" ]; then
+  COMMS_FILE="$HOME/.dotfiles-work-comms"
+  if [ -f "$COMMS_FILE" ]; then
+    comms="$(cat "$COMMS_FILE")"
+  else
+    comms="${WORK_COMMS:-}"
+    if [ -z "$comms" ]; then
+      echo ""
+      echo "Which comms apps for the work machine?"
+      echo "  options: slack zoom teams telegram  (space-separated, or 'all' / 'none')"
+      read -rp "> " comms
+    fi
+    [ "$comms" = "all" ]  && comms="slack zoom teams telegram"
+    [ "$comms" = "none" ] && comms=""
+    echo "$comms" > "$COMMS_FILE"
+  fi
+  for app in $comms; do
+    case "$app" in
+      slack)    cask_install slack ;;
+      zoom)     cask_install zoom ;;
+      teams)    cask_install microsoft-teams ;;
+      telegram) cask_install telegram ;;
+      *) echo "unknown comms app: $app (skipping)" ;;
+    esac
+  done
+fi
 
 echo ""
 echo "Done. Profile '$PROFILE' installed. Open a new terminal (or run: exec zsh)."
