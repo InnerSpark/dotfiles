@@ -1,0 +1,4 @@
+# Template. install.sh (work profile) generates ~/.gitconfig.work from a prompt.
+# The includeIf in .gitconfig applies this to repos under ~/work/.
+[user]
+	email = CHANGE-ME@your-company.com

@@ -1,0 +1,73 @@
+# ~/.zshrc
+# Lean, framework-free zsh config. Prompt comes from Starship,
+# autosuggestions and syntax highlighting from two brew packages.
+
+# --- History ------------------------------------------------------------
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY          # share history across open terminals
+setopt HIST_IGNORE_ALL_DUPS   # no duplicate entries
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY            # show expanded history before running
+
+# --- Shell behavior ------------------------------------------------------
+setopt AUTO_CD                # type a directory name to cd into it
+setopt CORRECT                # suggest corrections for mistyped commands
+setopt INTERACTIVE_COMMENTS
+unsetopt BEEP
+
+# --- Completion -----------------------------------------------------------
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'  # case-insensitive
+zstyle ':completion:*' menu select
+
+# --- PATH -----------------------------------------------------------------
+path=("$HOME/bin" $path)
+typeset -U path  # dedupe
+
+# --- Editor ---------------------------------------------------------------
+if command -v code >/dev/null; then
+  export EDITOR="code -w"
+else
+  export EDITOR="vim"
+fi
+export GIT_EDITOR="$EDITOR"
+
+# --- Tools ----------------------------------------------------------------
+# fnm: fast Node version manager (nvm replacement), switches on cd
+command -v fnm >/dev/null && eval "$(fnm env --use-on-cd)"
+
+# zoxide: frecency directory jumping (fasd replacement). Usage: z <partial>
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
+
+# fzf: fuzzy finder keybindings (Ctrl-R history, Ctrl-T files)
+command -v fzf >/dev/null && source <(fzf --zsh)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# --- Aliases ----------------------------------------------------------------
+[[ -f "$HOME/.aliases.zsh" ]] && source "$HOME/.aliases.zsh"
+
+# --- Prompt -----------------------------------------------------------------
+command -v starship >/dev/null && eval "$(starship init zsh)"
+
+# --- Autosuggestions + syntax highlighting ----------------------------------
+# brew on macOS, apt (/usr/share) on Debian/Ubuntu servers, or ~/.zsh/plugins.
+_zsh_plugin() {
+  local name="$1" base
+  for base in "$HOMEBREW_PREFIX/share" /usr/share /usr/local/share "$HOME/.zsh/plugins"; do
+    if [[ -f "$base/$name/$name.zsh" ]]; then
+      source "$base/$name/$name.zsh"
+      return
+    fi
+  done
+}
+_zsh_plugin zsh-autosuggestions
+_zsh_plugin zsh-syntax-highlighting   # must be sourced last
+unset -f _zsh_plugin
+
+# --- Machine-specific overrides (not committed to the repo) -----------------
+if [[ -f "$HOME/.zshrc.local" ]]; then
+  source "$HOME/.zshrc.local"
+fi

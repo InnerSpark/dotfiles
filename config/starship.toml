@@ -1,0 +1,86 @@
+# Starship prompt — powerline-style two-line prompt.
+# Successor to the old bash-it powerline-multiline theme.
+# Needs a Nerd Font in the terminal (Brewfile installs JetBrains Mono Nerd Font).
+# Docs: https://starship.rs/config/
+
+format = """
+[](fg:surface)\
+$os\
+$directory\
+[](fg:surface bg:peach)\
+$git_branch\
+$git_status\
+[](fg:peach bg:blue)\
+$nodejs\
+$docker_context\
+[](fg:blue)\
+$line_break$character
+"""
+
+right_format = """$cmd_duration$time"""
+
+add_newline = true
+palette = "spark"
+
+[palettes.spark]
+surface = "#45475a"
+peach = "#fab387"
+blue = "#89b4fa"
+text_light = "#cdd6f4"
+text_dark = "#1e1e2e"
+green = "#a6e3a1"
+red = "#f38ba8"
+muted = "#7f849c"
+
+[os]
+disabled = false
+style = "bg:surface fg:text_light"
+format = "[ $symbol ]($style)"
+
+[os.symbols]
+Macos = ""
+
+[directory]
+style = "bg:surface fg:text_light"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙"
+"Downloads" = ""
+"Developer" = "󰲋"
+
+[git_branch]
+symbol = ""
+style = "bg:peach fg:text_dark"
+format = "[ $symbol $branch ]($style)"
+
+[git_status]
+style = "bg:peach fg:text_dark"
+format = "[$all_status$ahead_behind]($style)"
+
+[nodejs]
+symbol = ""
+style = "bg:blue fg:text_dark"
+format = "[ $symbol $version ]($style)"
+
+[docker_context]
+symbol = ""
+style = "bg:blue fg:text_dark"
+format = "[ $symbol $context ]($style)"
+
+[cmd_duration]
+min_time = 2000
+style = "fg:muted"
+format = "[took $duration ]($style)"
+
+[time]
+disabled = false
+time_format = "%l:%M:%S"
+style = "fg:muted"
+format = "[ $time]($style)"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"

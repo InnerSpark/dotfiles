@@ -1,434 +1,132 @@
-#  Spark Dotfiles
-___
+# Dotfiles
 
-There has been to many times where I have had to configure a new server or computer from scratch. We all know how long this takes and how painful it can be to try and remember every app, every configuration and every tool we need or use day in and day out on each one of our computers or servers. This repo is here to help with that and to configure each and every one of my environments so that way I can spend more time doing what I love *(UX Design)* and less time configuring and setting up.
+Personal setup for macOS (Apple Silicon) and Debian/Ubuntu servers. Rebuilt
+July 2026 from the 2015-era bash-it version: zsh instead of bash, Starship
+instead of powerline themes, a layered Brewfile instead of package lists,
+per-machine profiles, and a small installer instead of DFM.
 
-##  Getting Started
-The first step we need to do is figure out what we are setting up. Are we setting up a new MacOS install, a web server, a development environment *(ideally this would be the same as your web server)* or something else all together.
+## Install (Mac)
 
-The first thing no mater what we are setting up is we need to get our Dotfiles installed from GitHub.
+```sh
+git clone https://github.com/InnerSpark/dotfiles.git ~/Developer/dotfiles
+cd ~/Developer/dotfiles
+./install.sh            # prompts for a profile the first time
+```
 
-	git clone https://github.com/InnerSpark/dotfiles.git $HOME/.dotfiles
+The installer symlinks configs into `$HOME` (backing up anything it replaces
+into `~/.dotfiles-backup-<timestamp>/`), sets up ssh, and installs the Homebrew
+packages for the chosen profile. It is safe to re-run. The profile is saved to
+`~/.dotfiles-profile`, so later `./install.sh` runs repeat it without asking.
 
-Next lets have DFM install the dotfiles.
+Running on a machine that already has SSH hosts is safe: the installer migrates
+your existing `~/.ssh/config` into `~/.ssh/config.local` (via the Include)
+rather than overwriting it, and the 1Password agent line ships commented out so
+your on-disk keys keep working until you turn it on.
 
-	./.dotfiles/bin/dfm install
+## Profiles
 
-Ok so now we have our base setup. Wahoo!
+Each machine picks one profile. Apps are layered: a common base plus the
+fragments that profile needs.
 
-##  MacOS Setup
+| Profile | Machines | Layers |
+|---|---|---|
+| `desktop` | M4 Studio, M1 Studio | common + design + dev + personal + desktop |
+| `laptop`  | personal MacBook Pro, Mac Mini | common + design + dev + personal |
+| `work`    | work MacBook Pro | common + design + dev (prompts for work git email) |
+| `server`  | Debian/Ubuntu boxes | runs `server/bootstrap.sh` (see Servers) |
 
-If we are setting up a new computer *(MacOS)* then the first thing we are going to want to do is it up so that all the features we want and don't want configured on the base os are taken care of. This next script does just that for you.
+Force a profile explicitly: `./install.sh work`.
 
-	./.dotfile/macos/setup.sh
+## Applications installed
 
-If you winder exactly what this script does, I would recommend opening it up and reading it. If you don't have the time for that, the best way i can describe it is that it runs allot of commands to change config setting in MacOS that may or may not be useful.
+Each header lists which profiles include that layer. Nothing is removed from a
+machine; `brew bundle` only adds.
 
-## HomeBrew
+### Common — every Mac (desktop, laptop, work)
 
-So I personaly use home brew to manage all my packages and applications. This next script will install the software that I use all the time, which allows me from having to go manualy download and install each one of them. In my opinion this thing is a life savor!
+CLI: `starship`, `zsh-autosuggestions`, `zsh-syntax-highlighting`, `git`, `gh`,
+`fzf`, `zoxide`, `eza`, `bat`, `ripgrep`, `fd`, `jq`, `tree`, `wget`,
+`shellcheck`, `tlrc`, `fnm`, `ffmpeg`, `imagemagick`.
 
-	./.dotfiles/homebrew/install.sh
+Apps: iTerm2, Raycast, Ice, 1Password, Google Chrome, Firefox, Slack, Claude
+(desktop), Claude Code.
 
-### Install Packages
-    brew install $(<~/.dotfiles/homebrew/packages.txt)
+Font: JetBrains Mono Nerd Font.
 
-#### List of Packages to Install
-* ack
-* ant
-* apparix
-* archey
-* asciidoc
-* asciinema
-* aspell
-* atk
-* autoconf
-* automake
-* bash-completion
-* bash-git-prompt
-* bdw-gc
-* berkeley-db
-* boost
-* boost-python
-* boot-clj
-* boot2docker
-* cabal-install
-* cabextract
-* cairo
-* cask
-* ccat
-* cheat
-* chicken
-* chrome-cli
-* clisp
-* clojurescript
-* cloog
-* closure-compiler
-* cmake
-* codequery
-* colordiff
-* coreutils
-* cowsay
-* cscope
-* ctags
-* curl
-* curlish
-* czmq
-* dateutils
-* dcraw
-* deisctl
-* dnsmasq
-* docbook
-* docbook-xsl
-* docker
-* dos2unix
-* doxygen
-* drip
-* duti
-* ecj
-* editorconfig
-* elinks
-* emacs
-* exif
-* exiftags
-* exiftool
-* expat
-* faac
-* faad2
-* fasd
-* ffmpeg
-* fig
-* figlet
-* findutils
-* fontconfig
-* fontforge
-* fortune
-* fpp
-* freetype
-* fswatch
-* fzf
-* gawk
-* gcc
-* gd
-* gdbm
-* gdk-pixbuf
-* geoip
-* gettext
-* ghc
-* ghostscript
-* giflib
-* gifsicle
-* gist
-* git
-* git-annex
-* git-extras
-* git-flow
-* git-hooks
-* git-lfs
-* glib
-* global
-* gmp
-* go
-* gobject-introspection
-* gpac
-* graphicsmagick
-* graphviz
-* grep
-* gsasl
-* gtk+
-* gts
-* haproxy
-* harfbuzz
-* heroku-toolbelt
-* hicolor-icon-theme
-* highlight
-* htmlcleaner
-* httpie
-* ical-buddy
-* icu4c
-* id3tool
-* ilmbase
-* imagemagick
-* intltool
-* irssi
-* isl
-* jasper
-* jbig2dec
-* jpeg
-* jpeg-archive
-* jpeg-turbo
-* jpeginfo
-* jpegoptim
-* known_hosts
-* lame
-* ledger
-* leiningen
-* lesspipe
-* libassuan
-* libatomic_ops
-* libcaca
-* libcroco
-* libdnet
-* libevent
-* libexif
-* libffi
-* libgcrypt
-* libgpg-error
-* libgphoto2
-* libicns
-* libiconv
-* libidn
-* libiscsi
-* libksba
-* liblqr
-* libmpc
-* libogg
-* libpng
-* libpng12
-* libquvi
-* librsvg
-* libsigsegv
-* libtasn1
-* libtiff
-* libtool
-* libusb
-* libusb-compat
-* libvo-aacenc
-* libvorbis
-* libwebm
-* libwmf
-* libxml2
-* libyaml
-* lighttpd
-* little-cms
-* little-cms2
-* llvm
-* lua
-* luajit
-* lynx
-* lzlib
-* lzo
-* macvim
-* mackup
-* mad
-* makedepend
-* maven
-* md5sha1sum
-* media-info
-* mercurial
-* mozjpeg
-* mpfr
-* mtr
-* multimarkdown
-* nasm
-* neon
-* neovim
-* netcat
-* netpbm
-* nettle
-* nmap
-* npth
-* nvm
-* openconnect
-* openexr
-* openjpeg
-* openssh
-* openssl
-* optipng
-* p7zip
-* packer-completion
-* pandoc
-* pango
-* passpie
-* pcre
-* pigz
-* pinentry
-* pixman
-* pkg-config
-* plantuml
-* plt-racket
-* pmd
-* pngcrush
-* pngnq
-* pngquant
-* poco
-* popt
-* postgresql
-* pstree
-* pth
-* purescript
-* pyqt
-* python
-* qscintilla2
-* qt
-* quvi
-* ranger
-* rbenv
-* readline
-* reattach-to-user-namespace
-* redis
-* rethinkdb
-* rsync
-* ruby-build
-* sane-backends
-* sbcl
-* scheme48
-* scons
-* sdl
-* sdl_image
-* shellcheck
-* sip
-* sl
-* smartypants
-* sqlite
-* ssh-copy-id
-* sslmate
-* stow
-* surfraw
-* taglib
-* texi2html
-* the_silver_searcher
-* tidy-html5
-* tidyp
-* tldr
-* tmux
-* tnef
-* transmission
-* trash
-* tree
-* ttfautohint
-* tvnamer
-* unison
-* unrar
-* urlview
-* vcprompt
-* w3m
-* watchman
-* webalizer
-* webkit2png
-* webp
-* wget
-* wrk
-* x264
-* xmlto
-* xvid
-* xz
-* yasm
-* zeromq
-* zopfli
+### Design — desktop, laptop, work
 
-### Install Cask Packages
-    brew cask install $(<~/.dotfiles/homebrew/cask_packages.txt)
+Figma, CleanShot X, Pika (color picker + WCAG contrast), ImageOptim.
 
-#### List of Cask Packages to Install
-* adobe-creative-cloud
-* amazon-cloud-drive
-* animated-gif-quicklook
-* app-tamer
-* appzapper
-* atom
-* bartender
-* bettertouchtool
-* betterzipql
-* bittorrent-sync
-* calibre
-* cheatsheet
-* controlplane
-* dropbox
-* dropzone
-* ember
-* epubquicklook
-* expandrive
-* firefox
-* firefoxdeveloperedition
-* flash
-* font-anonymous-pro-for-powerline
-* font-arial
-* font-bebas-neue
-* font-dejavu-sans-mono-for-powerline
-* font-droid-sans-mono-for-powerline
-* font-fira-mono-for-powerline
-* font-fira-sans
-* font-hasklig
-* font-inconsolata
-* font-inconsolata-dz-for-powerline
-* font-inconsolata-for-powerline
-* font-inconsolata-g-for-powerline
-* font-liberation-mono-for-powerline
-* font-meslo-lg-for-powerline
-* font-open-iconic
-* font-open-sans
-* font-raleway
-* font-sauce-code-powerline
-* font-source-code-pro
-* font-source-code-pro-for-powerline
-* font-ubuntu-mono-powerline
-* forklift
-* gas-mask
-* github
-* gitup
-* goodsync
-* googleappengine
-* google-drive
-* handbrake
-* handbrakecli
-* imagealpha
-* imagemin
-* imageoptim
-* istat-menus
-* java
-* macpass
-* omnifocus
-* omnifocus-clip-o-tron
-* omnigraffle
-* omnioutliner
-* omniplan
-* plex-home-theater
-* qlcolorcode
-* qlimagesize
-* qlmarkdown
-* qlnetcdf
-* qlprettypatch
-* qlrest
-* qlstephen
-* qlvideo
-* querious
-* quicklook-csv
-* quicklook-json
-* quicknfo
-* quotefix
-* rightfont
-* rubymine
-* seil
-* serf
-* sigil
-* sling
-* sonos
-* spamsieve
-* staruml
-* suspicious-package
-* teamviewer
-* textexpander
-* the-escapers-flux
-* tower
-* transmission
-* ttscoff-mmd-quicklook
-* ubersicht
-* vagrant
-* vagrant-manager
-* virtualbox
-* vlc
-* vmware-fusion
-* webpquicklook
-* webstorm
-* witch
-* xquartz
+### Dev — desktop, laptop, work
 
-##  We Are All Done For Now
+OrbStack (Docker runtime), TablePlus, Proxyman, Bruno.
 
-Well thats it for now. If you have any tips or ideas to make my dotfiles better in anyway I'm always open for feed back. Thank you for your interest!
+### Personal — desktop, laptop (kept off the work machine)
 
-### Sources
+Spotify, VLC, HandBrake.
 
- - DFM Full Documentation - [Wiki](http://github.com/justone/dotfiles/wiki) | [DFM GitHub](https://github.com/justone/dfm)
- - HomeBrew - [Website](http://brew.sh/)
+### Desktop-only — desktop
+
+Parallels, Carbon Copy Cloner.
+
+### Server (apt) — server profile
+
+`zsh`, `zsh-autosuggestions`, `zsh-syntax-highlighting`, `git`, `curl`, `wget`,
+`ca-certificates`, `gnupg`, `tmux`, `htop`, `ncdu`, `tree`, `unzip`, `jq`,
+`ripgrep`, `fd-find`, `bat`, `fzf`, `build-essential`, `ufw`, `fail2ban`,
+`unattended-upgrades`, plus Starship. See `server/packages.txt`.
+
+## Servers
+
+On a fresh Linux box, clone the repo and run the bootstrap (it re-elevates with
+sudo itself):
+
+```sh
+git clone https://github.com/InnerSpark/dotfiles.git ~/dotfiles
+~/dotfiles/server/bootstrap.sh              # or: ./install.sh server
+```
+
+It installs the baseline packages, sets up zsh + Starship to match the Macs,
+symlinks the shared shell config, and walks through optional hardening: a
+non-root sudo user, SSH lockdown (key-only, no root password), ufw, fail2ban,
+and automatic security updates.
+
+Hardening is safe by design. Password auth is only disabled when a working
+`authorized_keys` is present and you confirm, ufw always allows the detected
+SSH port before enabling, and every sshd change is validated with `sshd -t`
+(and rolled back if it fails). Flags: `--no-harden`, `--user NAME`, `--yes`.
+
+## Layout
+
+| Path | What it is |
+|---|---|
+| `install.sh` | Profile-aware Mac installer. |
+| `Brewfile` | Common packages, every Mac. |
+| `brew/*.Brewfile` | design, dev, personal, desktop app layers. |
+| `zsh/` | Shell config (cross-platform: macOS + Linux). |
+| `config/starship.toml` | Prompt. |
+| `git/gitconfig` | Identity, defaults, aliases; work identity for `~/work/` repos. |
+| `git/gitconfig.work.example` | Template; the real one is generated by install. |
+| `ssh/config` | Publish-safe: defaults + GitHub + (optional) 1Password agent. |
+| `ssh/config.local.example` | Template for real hosts (real file at `~/.ssh/config.local`). |
+| `server/bootstrap.sh` | Fresh-server provisioning + hardening. |
+| `server/packages.txt` | apt package list. |
+| `server/gitconfig` | Lean git config for servers (no macOS keychain). |
+| `macos/defaults.sh` | Finder/Dock/input preferences. |
+
+## Per-machine and secret config
+
+Anything machine-specific or private stays out of the repo and is applied if
+present:
+
+- `~/.zshrc.local` — shell tweaks for one machine
+- `~/.gitconfig.local` — git identity/overrides for one machine
+- `~/.gitconfig.work` — work email (generated by the `work` profile)
+- `~/.ssh/config.local` — real SSH hosts (IPs, ports, users)
+
+## Notes
+
+The prompt needs a Nerd Font; the Brewfile installs JetBrains Mono Nerd Font.
+`zoxide` replaces fasd (`z <partial>`), `fnm` replaces nvm, `eza` backs the
+`ls` aliases, and OrbStack provides the `docker` CLI. Claude Code and the
+Claude desktop app are in the common layer.

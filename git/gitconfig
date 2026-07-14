@@ -1,0 +1,49 @@
+# Machine-local overrides (identity, etc.) — untracked, optional.
+[include]
+	path = ~/.gitconfig.local
+
+[user]
+	name = Mike Binder
+	email = mike@innersparkmedia.com
+
+[core]
+	excludesfile = ~/.gitignore_global
+
+[init]
+	defaultBranch = main
+
+[pull]
+	ff = only
+
+[push]
+	default = current
+	autoSetupRemote = true
+
+[fetch]
+	prune = true
+
+[rebase]
+	autostash = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+	colorMoved = default
+
+[credential]
+	helper = osxkeychain
+
+[alias]
+	st = status -sb
+	co = checkout
+	br = branch
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	undo = reset --soft HEAD~1
+	amend = commit --amend --no-edit
+	unstage = reset HEAD --
+
+# Work repos (anything under ~/work/) use the work identity below.
+# Harmless on machines with no ~/work directory.
+[includeIf "gitdir:~/work/"]
+	path = ~/.gitconfig.work

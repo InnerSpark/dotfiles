@@ -1,0 +1,24 @@
+# apt packages installed on new servers by bootstrap.sh.
+# One per line, # comments allowed. Missing packages are skipped, not fatal.
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
+git
+curl
+wget
+ca-certificates
+gnupg
+tmux
+htop
+ncdu
+tree
+unzip
+jq
+ripgrep
+fd-find
+bat
+fzf
+build-essential
+ufw
+fail2ban
+unattended-upgrades

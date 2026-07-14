@@ -1,0 +1,20 @@
+# Lean git config for Linux servers (no macOS keychain helper).
+[user]
+	name = Mike Binder
+	email = mike@innersparkmedia.com
+[core]
+	excludesfile = ~/.gitignore_global
+[init]
+	defaultBranch = main
+[pull]
+	ff = only
+[push]
+	default = current
+	autoSetupRemote = true
+[fetch]
+	prune = true
+[credential]
+	helper = cache --timeout=3600
+[alias]
+	st = status -sb
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative

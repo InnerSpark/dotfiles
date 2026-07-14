@@ -1,0 +1,37 @@
+# ~/.ssh/config — modernized July 2026. Safe to publish.
+# Real hosts (servers, private boxes) live in ~/.ssh/config.local, which is
+# NOT tracked in this repo. This file only contains global defaults, GitHub,
+# and the 1Password agent wiring.
+
+# Load machine-local hosts. SSH silently ignores this if the file is absent.
+Include ~/.ssh/config.local
+
+# --- Global defaults --------------------------------------------------------
+Host *
+    ServerAliveInterval 60
+    # 1Password SSH agent (Touch ID per use). Uncomment AFTER enabling the SSH
+    # agent in the 1Password app and importing your keys. Until then, on-disk
+    # keys in ~/.ssh are used, so this is safe to leave off.
+    # IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    # Store known-host entries hashed, not as a readable list of where you connect
+    HashKnownHosts yes
+    # Connection sharing: repeated connections reuse one socket
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%r@%h:%p
+    ControlPersist 60s
+
+# --- GitHub -----------------------------------------------------------------
+Host github.com gist.github.com
+    User git
+    IdentityFile ~/.ssh/innerspark_github
+    IdentitiesOnly yes
+    PreferredAuthentications publickey
+
+# Fallback alias for networks that block port 22
+Host github-443
+    HostName ssh.github.com
+    Port 443
+    User git
+    IdentityFile ~/.ssh/innerspark_github
+    IdentitiesOnly yes
+    PreferredAuthentications publickey
