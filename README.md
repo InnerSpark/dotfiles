@@ -48,22 +48,23 @@ CLI: `starship`, `zsh-autosuggestions`, `zsh-syntax-highlighting`, `git`, `gh`,
 `fzf`, `zoxide`, `eza`, `bat`, `ripgrep`, `fd`, `jq`, `tree`, `wget`,
 `shellcheck`, `tlrc`, `fnm`, `ffmpeg`, `imagemagick`.
 
-Apps: iTerm2, Raycast, Ice, 1Password, Google Chrome, Firefox, Slack, Claude
-(desktop), Claude Code.
+Apps: iTerm2, Raycast, Ice, 1Password, Google Chrome, Firefox, Slack, Notion,
+Granola, Claude (desktop), Claude Code.
 
 Font: JetBrains Mono Nerd Font.
 
 ### Design — desktop, laptop, work
 
-Figma, CleanShot X, Pika (color picker + WCAG contrast), ImageOptim.
+Figma, Adobe Creative Cloud, CleanShot X, Pika (color picker + WCAG contrast),
+ImageOptim.
 
 ### Dev — desktop, laptop, work
 
-OrbStack (Docker runtime), TablePlus, Proxyman, Bruno.
+VS Code, OrbStack (Docker runtime), TablePlus, Proxyman, Bruno.
 
 ### Personal — desktop, laptop (kept off the work machine)
 
-Spotify, VLC, HandBrake.
+Spotify, VLC, HandBrake, Dropbox, Google Drive.
 
 ### Desktop-only — desktop
 

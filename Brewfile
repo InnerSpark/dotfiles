@@ -39,6 +39,8 @@ cask "1password"
 cask "google-chrome"
 cask "firefox"
 cask "slack"
+cask "notion"                         # notes / docs
+cask "granola"                        # AI meeting notes
 
 # --- Fonts ------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"  # glyphs for the Starship prompt

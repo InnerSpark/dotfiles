@@ -3,3 +3,5 @@
 cask "spotify"
 cask "vlc"
 cask "handbrake-app"      # video transcoder
+cask "dropbox"
+cask "google-drive"
