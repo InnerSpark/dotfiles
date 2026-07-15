@@ -178,13 +178,21 @@ fi
 if [ "$OS" != "Darwin" ]; then
   note "Non-macOS host with a Mac profile; skipping Homebrew apps."; exit 0
 fi
+# If Homebrew is installed but not yet on this shell's PATH (fresh install,
+# or a shell that hasn't sourced zprofile), load it before deciding anything.
+if ! command -v brew >/dev/null; then
+  for b in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [ -x "$b" ]; then eval "$("$b" shellenv)"; break; fi
+  done
+fi
+
+# Only install Homebrew if it's genuinely absent.
 if ! command -v brew >/dev/null; then
   head2 "Homebrew not found — installing it"
   note "you may be asked for your password (Homebrew needs sudo to set up)"
   NONINTERACTIVE=1 /bin/bash -c \
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
     || { echo "Homebrew install failed (network?). Install it manually and re-run."; exit 1; }
-  # Put brew on PATH for the rest of this run (zprofile handles future shells).
   if   [ -x /opt/homebrew/bin/brew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"
   elif [ -x /usr/local/bin/brew   ]; then eval "$(/usr/local/bin/brew shellenv)"; fi
   if command -v brew >/dev/null; then ok "Homebrew installed"
