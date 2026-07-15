@@ -32,10 +32,28 @@ fragments that profile needs.
 |---|---|---|
 | `desktop` | M4 Studio, M1 Studio | common + design + dev + personal + desktop |
 | `laptop`  | personal MacBook Pro, Mac Mini | common + design + dev + personal |
-| `work`    | work MacBook Pro | common + design + dev (prompts for work git email + comms apps) |
+| `work`    | work MacBook Pro | common + apps you select (prompts for git email, design/dev apps, comms) |
 | `server`  | Debian/Ubuntu boxes | runs `server/bootstrap.sh` (see Servers) |
 
-Force a profile explicitly: `./install.sh work`.
+Force a profile explicitly: `./install.sh work`. Preview without changing
+anything: `./install.sh desktop --dry-run`.
+
+## First-run setup
+
+After installing packages, the installer runs a one-time set of optional
+questions (skip any with `N`; re-run them later with `./install.sh --reconfigure`):
+
+- Default editor (VS Code / Cursor / Zed / nvim / vim) → written to `~/.zshrc.local`
+- Enable the 1Password SSH agent → adds the `IdentityAgent` line to `~/.ssh/config.local`
+- `gh auth login` (also fixes HTTPS push credentials)
+- Generate an ed25519 SSH key if none exists, optionally add it to GitHub
+- SSH commit signing → written to `~/.gitconfig.local`
+- Install the latest Node LTS via `fnm`
+- Set the computer / host name
+- Add a "Spark" iTerm2 profile (JetBrains Mono Nerd Font + theme)
+- Apply `macos/defaults.sh`
+
+Adobe Creative Cloud is a separate yes/no prompt during install (large download).
 
 ## Applications installed
 
@@ -49,16 +67,16 @@ CLI: `starship`, `zsh-autosuggestions`, `zsh-syntax-highlighting`, `git`, `gh`,
 `shellcheck`, `tlrc`, `fnm`, `ffmpeg`, `imagemagick`.
 
 Apps: iTerm2, Raycast, Ice, 1Password, Google Chrome, Firefox, Notion,
-Granola, Claude (desktop), Claude Code.
+Granola, RustDesk, Claude (desktop), Claude Code.
 
 Font: JetBrains Mono Nerd Font.
 
-### Design — desktop, laptop, work
+### Design — desktop, laptop (work: pick individually)
 
 Figma, Adobe Creative Cloud, CleanShot X, Pika (color picker + WCAG contrast),
 ImageOptim.
 
-### Dev — desktop, laptop, work
+### Dev — desktop, laptop (work: pick individually)
 
 VS Code, OrbStack (Docker runtime), TablePlus, Proxyman, Bruno.
 
@@ -67,11 +85,19 @@ VS Code, OrbStack (Docker runtime), TablePlus, Proxyman, Bruno.
 Spotify, VLC, HandBrake, Dropbox, Google Drive, Slack, Zoom, Microsoft Teams,
 Telegram.
 
-### Work comms — work profile
+### Work profile — you pick
 
-The `work` profile does not install the personal comms apps. Instead it asks
-which to install (`slack zoom teams telegram`, or `all` / `none`) and remembers
-the answer in `~/.dotfiles-work-comms`.
+Unlike desktop/laptop, the `work` profile installs nothing beyond the common
+layer automatically. It prompts for:
+
+- which design/dev apps to install (`figma cleanshot pika imageoptim vscode
+  orbstack tableplus proxyman bruno adobe`, or `all` / `none`) → remembered in
+  `~/.dotfiles-work-apps`
+- which comms apps (`slack zoom teams telegram`, or `all` / `none`) →
+  `~/.dotfiles-work-comms`
+
+Skip either prompt on re-runs by leaving the saved file, or preset them with
+`WORK_APPS="figma vscode" WORK_COMMS="slack" ./install.sh work`.
 
 ### Desktop-only — desktop
 

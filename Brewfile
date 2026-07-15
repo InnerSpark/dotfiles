@@ -40,6 +40,7 @@ cask "google-chrome"
 cask "firefox"
 cask "notion"                         # notes / docs
 cask "granola"                        # AI meeting notes
+cask "rustdesk"                       # remote desktop into your fleet
 
 # --- Fonts ------------------------------------------------------------------
 cask "font-jetbrains-mono-nerd-font"  # glyphs for the Starship prompt
