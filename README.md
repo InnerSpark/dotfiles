@@ -83,7 +83,7 @@ VS Code, OrbStack (Docker runtime), TablePlus, Proxyman, Bruno.
 ### Personal — desktop, laptop (kept off the work machine)
 
 Spotify, VLC, HandBrake, Dropbox, Google Drive, Slack, Zoom, Microsoft Teams,
-Telegram.
+Telegram, Tailscale (mesh VPN; personal machines and servers, not work).
 
 ### Work profile — you pick
 
@@ -125,10 +125,13 @@ symlinks the shared shell config, and walks through optional hardening: a
 non-root sudo user, SSH lockdown (key-only, no root password), ufw, fail2ban,
 and automatic security updates.
 
-Hardening is safe by design. Password auth is only disabled when a working
+Hardening is safe by design. SSH hardening is skipped entirely if the box is
+already hardened (it never overrides an SSH config you set up yourself), and is
+opt-in otherwise. Password auth is only disabled when a working
 `authorized_keys` is present and you confirm, ufw always allows the detected
 SSH port before enabling, and every sshd change is validated with `sshd -t`
-(and rolled back if it fails). Flags: `--no-harden`, `--user NAME`, `--yes`.
+(and rolled back if it fails). It also offers to install Tailscale. Flags:
+`--no-harden`, `--user NAME`, `--yes`.
 
 ## Layout
 

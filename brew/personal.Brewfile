@@ -10,3 +10,5 @@ cask "slack"
 cask "zoom"
 cask "microsoft-teams"
 cask "telegram"
+# Networking
+cask "tailscale-app"      # mesh VPN (GUI app; personal machines, not work)

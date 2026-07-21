@@ -117,35 +117,46 @@ if [ "$HARDEN" = "1" ]; then
     fi
   fi
 
-  # 4b. SSH hardening via drop-in
+  # 4b. SSH hardening via drop-in.
+  # Skipped entirely if the box is already hardened, so we never override the
+  # SSH config you set up yourself. Otherwise it's opt-in (defaults to skip).
   SSH_PORT="$(awk '/^[Pp]ort /{print $2; exit}' /etc/ssh/sshd_config)"; SSH_PORT="${SSH_PORT:-22}"
   keys_present=0
   [ -s "/home/$TARGET_USER/.ssh/authorized_keys" ] && keys_present=1
   [ -s /root/.ssh/authorized_keys ] && keys_present=1
+  DROPIN=/etc/ssh/sshd_config.d/99-mike-hardening.conf
 
-  if ! grep -qiE '^\s*Include\s+/etc/ssh/sshd_config\.d' /etc/ssh/sshd_config; then
-    warn "sshd_config has no Include for sshd_config.d; the drop-in may be ignored. Skipping SSH changes."
-  else
-    DROPIN=/etc/ssh/sshd_config.d/99-mike-hardening.conf
-    log "Configuring SSH hardening (port $SSH_PORT detected)"
+  existing=0
+  for f in /etc/ssh/sshd_config /etc/ssh/sshd_config.d/*.conf; do
+    [ -f "$f" ] || continue
+    [ "$f" = "$DROPIN" ] && continue
+    if grep -qiE '^[[:space:]]*(PermitRootLogin|PasswordAuthentication)[[:space:]]' "$f" 2>/dev/null; then
+      existing=1
+    fi
+  done
+
+  if [ "$existing" = 1 ]; then
+    warn "SSH already hardened here (PermitRootLogin/PasswordAuthentication set elsewhere) — leaving SSH config untouched."
+  elif ! grep -qiE '^\s*Include\s+/etc/ssh/sshd_config\.d' /etc/ssh/sshd_config; then
+    warn "sshd_config has no Include for sshd_config.d; skipping SSH changes."
+  elif confirm "Apply Spark SSH hardening? (PermitRootLogin prohibit-password, X11Forwarding no)"; then
+    log "Configuring SSH hardening (port $SSH_PORT)"
     { echo "# Managed by dotfiles server bootstrap"
       echo "PubkeyAuthentication yes"
-      echo "PermitRootLogin prohibit-password"   # root key still works; no root password
+      echo "PermitRootLogin prohibit-password"
       echo "X11Forwarding no"
     } > "$DROPIN"
-    if [ "$keys_present" = "1" ] && confirm "Disable SSH password auth (key-only)? Confirm your key login works first"; then
-      echo "PasswordAuthentication no" >> "$DROPIN"
-      echo "  password auth disabled"
-    else
-      echo "  leaving password auth as-is"
+    if [ "$keys_present" = "1" ] && confirm "Also disable SSH password auth (key-only)? Confirm your key login works first"; then
+      echo "PasswordAuthentication no" >> "$DROPIN"; echo "  password auth disabled"
     fi
     if sshd -t 2>/dev/null; then
       systemctl restart ssh 2>/dev/null || systemctl restart sshd 2>/dev/null || true
       echo "  sshd reloaded"
     else
-      warn "sshd -t failed; removing drop-in to avoid breaking SSH"
-      rm -f "$DROPIN"
+      warn "sshd -t failed; removing drop-in to avoid breaking SSH"; rm -f "$DROPIN"
     fi
+  else
+    echo "  skipped SSH hardening"
   fi
 
   # 4c. Firewall (allow SSH first, then enable)
@@ -169,6 +180,14 @@ if [ "$HARDEN" = "1" ]; then
 APT::Periodic::Update-Package-Lists "1";
 APT::Periodic::Unattended-Upgrade "1";
 EOF
+  fi
+fi
+
+# --- 5. Tailscale (mesh VPN for private boxes) ------------------------------
+if ! command -v tailscale >/dev/null; then
+  if confirm "Install Tailscale (mesh VPN)?"; then
+    curl -fsSL https://tailscale.com/install.sh | sh || warn "Tailscale install failed"
+    command -v tailscale >/dev/null && echo "  installed — run 'sudo tailscale up' to connect this machine"
   fi
 fi
 
